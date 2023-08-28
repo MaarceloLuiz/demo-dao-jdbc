@@ -57,10 +57,15 @@ public class SellerDaoJDBC implements SellerDao{
 			//in case there's no results, this method will return null
 			//rs.next() is a boolean
 			if(rs.next()) {
+				/*
+				//instantiate the department
 				Department dep = new Department();
 				dep.setId(rs.getInt("DepartmentId"));
 				dep.setName(rs.getString("DepName"));
-				
+				*/
+						
+				/*
+				//instantiate the seller
 				Seller obj = new Seller();
 				obj.setId(rs.getInt("Id"));
 				obj.setName(rs.getString("Name"));
@@ -69,6 +74,11 @@ public class SellerDaoJDBC implements SellerDao{
 				obj.setBirthDate(rs.getDate("BirthDate"));
 				//in that case it's not the Id, but the whole Department object
 				obj.setDepartment(dep);
+				*/
+				
+				//we can actually reuse instantiation in a new method
+				Department dep = instantiateDepartment(rs);
+				Seller obj = instantiateSeller(rs, dep);
 				
 				return obj;
 			}
@@ -83,6 +93,26 @@ public class SellerDaoJDBC implements SellerDao{
 			
 			//we won't close the connection now, because we might use it again. We will close it in the main program.
 		}
+	}
+
+	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBaseSalary(rs.getDouble("BaseSalary"));
+		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setDepartment(dep);
+		
+		return obj;
+	}
+
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setName(rs.getString("DepName"));
+		
+		return dep;
 	}
 
 	@Override
