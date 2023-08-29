@@ -17,8 +17,9 @@ public class Program {
 		
 		Seller seller = sellerDao.findById(3);
 		System.out.println(seller);
+		//is going to be printed the seller's info found in the id 3 row
 		
-		System.out.println("--- Test 1: seller findById ---");
+		System.out.println("\n--- Test 2: seller findByDepartment ---");
 		
 		Department dep = new Department(2, null);
 		List<Seller> list = sellerDao.findByDepartment(dep);
@@ -28,6 +29,16 @@ public class Program {
 			
 			//its going to be printed all the Sellers who works at our chosen department
 			//and also, all of then are referring to the same object (the chosen department)
+		}
+		
+		System.out.println("\n--- Test 3: seller findAll ---");
+		
+		list = sellerDao.findAll();
+		
+		for (Seller obj : list) {
+			System.out.println(obj);
+			
+			//printing all the sellers sorted by name
 		}
 		
 		
