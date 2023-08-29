@@ -48,6 +48,13 @@ public class Program {
 		sellerDao.insert(newSeller);
 		System.out.println("Inserted! New id = " + newSeller.getId());
 		//a new seller is going to be inserted in our database
+		
+		System.out.println("\n--- Test 5: seller update ---");
+		seller = sellerDao.findById(9);
+		seller.setName("Greg White");
+		sellerDao.update(seller);
+		System.out.println("Update completed");
+		//seller with id 9 is going to have it's data updated
 	
 		
 		//the info is going to be collected from our database
