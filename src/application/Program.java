@@ -1,7 +1,10 @@
 package application;
 
+import java.util.List;
+
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
+import model.entities.Department;
 import model.entities.Seller;
 
 public class Program {
@@ -15,8 +18,20 @@ public class Program {
 		Seller seller = sellerDao.findById(3);
 		System.out.println(seller);
 		
-		//the info is going to be collected from our database/
-		//is going to be printed the seller's info found in the id 3 row
+		System.out.println("--- Test 1: seller findById ---");
+		
+		Department dep = new Department(2, null);
+		List<Seller> list = sellerDao.findByDepartment(dep);
+		
+		for (Seller obj : list) {
+			System.out.println(obj);
+			
+			//its going to be printed all the Sellers who works at our chosen department
+			//and also, all of then are referring to the same object (the chosen department)
+		}
+		
+		
+		//the info is going to be collected from our database
 	}
 
 }
